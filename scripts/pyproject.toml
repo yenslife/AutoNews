@@ -15,5 +15,5 @@ dependencies = [
     "setuptools>=80.9.0",
     "undetected-chromedriver>=3.5.5",
     "webdriver-manager>=4.0.2",
-    "youtube-transcript-api>=1.1.0",
+    "yt-dlp>=2025.6.30",
 ]
