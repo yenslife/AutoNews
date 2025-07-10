@@ -7,6 +7,7 @@ import os
 
 import undetected_chromedriver as uc
 from selenium_stealth import stealth
+
 # from fake_useragent import UserAgent
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -19,11 +20,12 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 url_list = ["https://www.dcard.tw/f/ncku"]
 
+
 # NOTE: SB test
 def sb_get_raw_html(url: str):
     with SB(uc=True, test=True, locale="en", xvfb=True) as sb:
         sb.activate_cdp_mode(url)
-        sb.uc_gui_click_captcha() # 如果要這樣就不能用 headless 模式
+        sb.uc_gui_click_captcha()  # 如果要這樣就不能用 headless 模式
         sb.sleep(2)
         sb.open(url)
         sb.wait_for_element("body", timeout=10)  # wait for the page to load
@@ -31,6 +33,7 @@ def sb_get_raw_html(url: str):
         with open("dcard_content.html", "w", encoding="utf-8") as f:
             f.write(result)
         return result
+
 
 def get_fake_user_agent():
     # This function can be used to generate a fake user agent using OpenAI's API
@@ -79,7 +82,6 @@ def setup_driver():
     # print(f"Using User-Agent from fake-useragent: {user_agent}")
     # options.add_argument(f"--user-agent={user_agent}")
 
-
     ### NOTE: 設定 proxy, 這邊目前還沒弄好，之所以會需要這個是因為要避免速率限制，而出現 cloudflare 的防護機制
 
     # # proxy = FreeProxy(country_id='TW', rand=True, timeout=1.0).get()
@@ -87,7 +89,6 @@ def setup_driver():
     # proxy = FreeProxy().get()
     # print(f"Using Proxy: {proxy}")   ## get proxy ip
     # options.add_argument(f"--proxy-server={proxy}")
-
 
     driver = uc.Chrome(options=options)
     return driver

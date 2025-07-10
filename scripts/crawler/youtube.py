@@ -8,6 +8,7 @@ import yt_dlp
 # TODO: 判斷該影片有沒有字幕，如果沒有字幕，使用 Whisper API 進行語音辨識，可能會需要先將音源下載下來
 # TODO: 判斷某些頻道有沒有新影片，如果有就要下載字幕
 
+
 def get_youtube_transcript(
     video_id: str, languages: list[str] = ["zh-TW", "zh-Hant", "en", "zh-Hans"]
 ) -> str | None:
@@ -72,9 +73,13 @@ def get_youtube_transcript(
             print(f"下載字幕內容時發生錯誤: {e}")
             return None
 
-def get_transcript(video_id: str, languages: list[str] = ["zh-TW", "zh-Hant", "en", "zh-Hans"]) -> str | None:
+
+def get_transcript(
+    video_id: str, languages: list[str] = ["zh-TW", "zh-Hant", "en", "zh-Hans"]
+) -> str | None:
     # TODO: 將 get_youtube_transcript 和 whisper_api 的功能合併，如果沒有 yt_dlp 的字幕，就使用 whisper_api 進行語音辨識
     pass
+
 
 def get_youtube_audio(video_id: str):
     url = f"https://www.youtube.com/watch?v={video_id}"
@@ -97,6 +102,7 @@ def get_youtube_audio(video_id: str):
 
     # return binary audio data
     return ydl.prepare_filename(info)
+
 
 def get_youtube_thumbnail(video_id: str) -> str | None:
     """
@@ -129,11 +135,9 @@ def get_youtube_thumbnail(video_id: str) -> str | None:
         return f"{video_id}_thumbnail.jpg"
 
 
-
-
 if __name__ == "__main__":
     ytt_id = "AVIKFXLCPY8"
-    ytt_id = 'HnzDaEiN_eg'
+    ytt_id = "HnzDaEiN_eg"
     # ytt_id = 'YFQUZ08hYaQ'
     # ytt_id = '18R_RORjvUU'
     # ytt_id = "FWAdfuPpLOc"  # 多語言的字幕 只有簡體中文
