@@ -1,7 +1,6 @@
 # TODO: Dcard 登入使用 pyauto gui 比較方便，所以可能需要用 xvfb container 比較好，再想一下這邊的架構怎麼設計
 # 目前想到是直接用一個 docker compose 來一次開，然後執行到這個腳本的時候利用那個 container 當作假的 Display
 import time
-import random
 import os
 
 

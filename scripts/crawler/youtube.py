@@ -1,7 +1,6 @@
 import json
 
 import requests
-from youtube_transcript_api import YouTubeTranscriptApi, FetchedTranscript, TranscriptsDisabled  # type: ignore[reportMissingExports]
 from rich import print
 import yt_dlp
 
