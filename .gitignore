@@ -11,3 +11,9 @@ wheels/
 
 # Environment variables
 .env
+
+# audio files
+*.m4a
+
+# yt-dlp info files
+info.json

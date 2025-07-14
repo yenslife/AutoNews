@@ -34,6 +34,39 @@ wheels = [
 ]
 
 [[package]]
+name = "autonews"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "fake-useragent" },
+    { name = "openai" },
+    { name = "python-dotenv" },
+    { name = "rich" },
+    { name = "selenium" },
+    { name = "selenium-stealth" },
+    { name = "seleniumbase" },
+    { name = "setuptools" },
+    { name = "undetected-chromedriver" },
+    { name = "webdriver-manager" },
+    { name = "yt-dlp" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "fake-useragent", specifier = ">=2.2.0" },
+    { name = "openai", specifier = ">=1.90.0" },
+    { name = "python-dotenv", specifier = ">=1.1.0" },
+    { name = "rich", specifier = ">=14.0.0" },
+    { name = "selenium", specifier = ">=4.33.0" },
+    { name = "selenium-stealth", specifier = ">=1.0.6" },
+    { name = "seleniumbase", specifier = ">=4.39.5" },
+    { name = "setuptools", specifier = ">=80.9.0" },
+    { name = "undetected-chromedriver", specifier = ">=3.5.5" },
+    { name = "webdriver-manager", specifier = ">=4.0.2" },
+    { name = "yt-dlp", specifier = ">=2025.6.30" },
+]
+
+[[package]]
 name = "beautifulsoup4"
 version = "4.13.4"
 source = { registry = "https://pypi.org/simple" }
@@ -708,39 +741,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/aa/23/3c5b816b0c4de8452a8ceef5be39b4cdba05d8a15c214673c7cf4f4b499a/sbvirtualdisplay-1.4.0.tar.gz", hash = "sha256:29a365b509cd7bfde4f758603b7b75703909b11cdf4245abc8f828ed35660d9b", size = 12631, upload-time = "2024-12-16T15:02:18.341Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/de/65/832a5d0953f03c0b9bc267c58813aa51957b27c0902743f8e4d11d020dd1/sbvirtualdisplay-1.4.0-py3-none-any.whl", hash = "sha256:516de155219aa342c4e090a3c5126cfe6b12416334bcba3255268e44a5e8a206", size = 12490, upload-time = "2024-12-16T15:02:17.195Z" },
-]
-
-[[package]]
-name = "scripts"
-version = "0.1.0"
-source = { virtual = "." }
-dependencies = [
-    { name = "fake-useragent" },
-    { name = "openai" },
-    { name = "python-dotenv" },
-    { name = "rich" },
-    { name = "selenium" },
-    { name = "selenium-stealth" },
-    { name = "seleniumbase" },
-    { name = "setuptools" },
-    { name = "undetected-chromedriver" },
-    { name = "webdriver-manager" },
-    { name = "yt-dlp" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "fake-useragent", specifier = ">=2.2.0" },
-    { name = "openai", specifier = ">=1.90.0" },
-    { name = "python-dotenv", specifier = ">=1.1.0" },
-    { name = "rich", specifier = ">=14.0.0" },
-    { name = "selenium", specifier = ">=4.33.0" },
-    { name = "selenium-stealth", specifier = ">=1.0.6" },
-    { name = "seleniumbase", specifier = ">=4.39.5" },
-    { name = "setuptools", specifier = ">=80.9.0" },
-    { name = "undetected-chromedriver", specifier = ">=3.5.5" },
-    { name = "webdriver-manager", specifier = ">=4.0.2" },
-    { name = "yt-dlp", specifier = ">=2025.6.30" },
 ]
 
 [[package]]

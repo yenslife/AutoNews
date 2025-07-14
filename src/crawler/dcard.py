@@ -51,7 +51,6 @@ def get_fake_user_agent():
 
 
 def setup_driver():
-
     options = uc.ChromeOptions()
     # options.add_argument("--headless")
     options.add_argument("--no-sandbox")

@@ -4,6 +4,8 @@ import requests
 from rich import print
 import yt_dlp
 
+from ..api.whisper import transcribe_audio
+
 # TODO: 判斷該影片有沒有字幕，如果沒有字幕，使用 Whisper API 進行語音辨識，可能會需要先將音源下載下來
 # TODO: 判斷某些頻道有沒有新影片，如果有就要下載字幕
 
@@ -73,13 +75,6 @@ def get_youtube_transcript(
             return None
 
 
-def get_transcript(
-    video_id: str, languages: list[str] = ["zh-TW", "zh-Hant", "en", "zh-Hans"]
-) -> str | None:
-    # TODO: 將 get_youtube_transcript 和 whisper_api 的功能合併，如果沒有 yt_dlp 的字幕，就使用 whisper_api 進行語音辨識
-    pass
-
-
 def get_youtube_audio(video_id: str):
     url = f"https://www.youtube.com/watch?v={video_id}"
     ydl_opts = {
@@ -134,22 +129,55 @@ def get_youtube_thumbnail(video_id: str) -> str | None:
         return f"{video_id}_thumbnail.jpg"
 
 
+def get_transcript(
+    video_id: str, languages: list[str] = ["zh-TW", "zh-Hant", "en", "zh-Hans"]
+) -> str | None:
+    # TODO: 將 get_youtube_transcript 和 whisper_api 的功能合併，如果沒有 yt_dlp 的字幕，就使用 whisper_api 進行語音辨識
+
+    if not video_id:
+        print("請提供有效的 YouTube 影片 ID")
+        return None
+
+    transcript = get_youtube_transcript(video_id, languages)
+    if transcript:
+        return transcript
+    print(f"影片 {video_id} 沒有字幕，將使用 Whisper API 進行語音辨識")
+
+    audio_file = get_youtube_audio(video_id)
+    if not audio_file:
+        print(f"無法下載影片 {video_id} 的音訊檔案")
+        return None
+    print(f"音訊檔案已下載: {audio_file}")
+
+    # TODO: 使用 Whisper API 進行語音辨識
+    transcript = transcribe_audio(audio_file)
+    if not transcript:
+        print(f"無法從音訊檔案 {audio_file} 中取得文字")
+        return None
+
+    return transcript
+
+
 if __name__ == "__main__":
-    ytt_id = "AVIKFXLCPY8"
+    # ytt_id = "AVIKFXLCPY8"
     ytt_id = "HnzDaEiN_eg"
     # ytt_id = 'YFQUZ08hYaQ'
     # ytt_id = '18R_RORjvUU'
     # ytt_id = "FWAdfuPpLOc"  # 多語言的字幕 只有簡體中文
     # ytt_id = "0e3GPea1Tyg"  # 多語言的字幕 有繁體中文
 
-    ## test for get_youtube_audio
-    result = get_youtube_audio(ytt_id)
-    print("下載的音訊檔:", result)
+    # ## test for get_youtube_audio
+    # result = get_youtube_audio(ytt_id)
+    # print("下載的音訊檔:", result)
+    #
+    # ## test for get_youtube_transcript
+    # result = get_youtube_transcript(ytt_id)
+    # print("找到的 srt:", result)
+    #
+    # ## test for get_youtube_thumbnail
+    # result = get_youtube_thumbnail(ytt_id)
+    # print("找到的縮圖: ", result)
 
-    ## test for get_youtube_transcript
-    result = get_youtube_transcript(ytt_id)
-    print("找到的 srt:", result)
-
-    ## test for get_youtube_thumbnail
-    result = get_youtube_thumbnail(ytt_id)
-    print("找到的縮圖: ", result)
+    ## test for get_transcript
+    result = get_transcript(ytt_id)
+    print("取得的文字:", result)

@@ -9,7 +9,6 @@ print("base_url", base_url)
 
 
 def transcribe_audio(file_path: str) -> str:
-
     if not base_url:
         raise ValueError("WHISPER_API_BASE_URL environment variable is not set.")
 
