@@ -17,3 +17,6 @@ wheels/
 
 # yt-dlp info files
 info.json
+
+# srt files
+*.srt

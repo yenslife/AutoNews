@@ -4,10 +4,11 @@ import requests
 from rich import print
 import yt_dlp
 
-from ..api.whisper import transcribe_audio
+from src.api.whisper import transcribe_audio
 
 # TODO: 判斷該影片有沒有字幕，如果沒有字幕，使用 Whisper API 進行語音辨識，可能會需要先將音源下載下來
 # TODO: 判斷某些頻道有沒有新影片，如果有就要下載字幕
+# TODO: https://github.com/YaoFANGUK/video-subtitle-extractor 嘗試使用這個來辨識字幕
 
 
 def get_youtube_transcript(
@@ -159,12 +160,14 @@ def get_transcript(
 
 
 if __name__ == "__main__":
+    ## 在專案根目錄使用 uv run python -m src.crawler.youtube 來測試 (這樣可以避免相對路徑的問題)
     # ytt_id = "AVIKFXLCPY8"
-    ytt_id = "HnzDaEiN_eg"
+    # ytt_id = "HnzDaEiN_eg"
     # ytt_id = 'YFQUZ08hYaQ'
     # ytt_id = '18R_RORjvUU'
-    # ytt_id = "FWAdfuPpLOc"  # 多語言的字幕 只有簡體中文
-    # ytt_id = "0e3GPea1Tyg"  # 多語言的字幕 有繁體中文
+    # ytt_id = "FWAdfuPpLOc" # 多語言的字幕 只有簡體中文
+    # ytt_id = "0e3GPea1Tyg" # 多語言的字幕 有繁體中文
+    ytt_id = "5XktX_THdH8"  # 有繁體中文，一小時的 podcast
 
     # ## test for get_youtube_audio
     # result = get_youtube_audio(ytt_id)
@@ -180,4 +183,9 @@ if __name__ == "__main__":
 
     ## test for get_transcript
     result = get_transcript(ytt_id)
-    print("取得的文字:", result)
+    if result is None:
+        print(f"無法取得影片 {ytt_id} 的文字內容")
+        exit(1)
+
+    with open(f"{ytt_id}_transcript.srt", "w", encoding="utf-8") as f:
+        f.write(result)
